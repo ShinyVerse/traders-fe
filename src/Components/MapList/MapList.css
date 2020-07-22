@@ -1,0 +1,14 @@
+.marker:active,
+.marker:hover {
+  background-color: green;
+}
+
+.marker {
+  z-index: 1000;
+  position: relative;
+  width: 18px;
+  height: 18px;
+  background-color: #000;
+  border: 2px solid #fff;
+  border-radius: 100%;
+}

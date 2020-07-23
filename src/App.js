@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import TradeSelector from "./Components/TradeSelector/TradeSelector";
 import "./App.css";
 import data from "./mockdata";
 import JobList from "./Components/JobList/JobList";
 import MapList from "./Components/MapList/MapList";
+import DropDown from "./Components/DropDown/DropDown";
 
 const trades = data.reduce((joblist, job) => {
   return joblist.includes(job.$trade) ? joblist : [...joblist, job.$trade];
@@ -29,15 +29,16 @@ const getDistance = (p1, p2) => {
   return (d / 1609.344).toFixed(1); //returns miles
 };
 
-const findAllMatchingTrades = (type, currentCoords) => {
+const findAllMatchingTrades = (type, currentCoords, distanceForTravel) => {
   return data.reduce((joblist, job) => {
     if (job.$trade === type) {
       const jobLocation = {
         lat: job.$propertyLocation.coords.latitude,
         lng: job.$propertyLocation.coords.longitude,
       };
-      if (getDistance(currentCoords, jobLocation) <= 40) {
-        return [...joblist, job];
+      const distanceFromTrader = getDistance(currentCoords, jobLocation);
+      if (distanceFromTrader <= Number(distanceForTravel)) {
+        return [...joblist, { ...job, distanceFromTrader }];
       }
       return joblist;
     } else {
@@ -49,26 +50,32 @@ const findAllMatchingTrades = (type, currentCoords) => {
 function App() {
   const [jobs, setJobs] = useState(null);
   const [selectedJob, setSelectedJob] = useState(null);
-  const [location, setLocation] = useState("");
   const [currentCoords, setCurrentCoords] = useState("");
 
-  const updateLocation = ({ target }) => {
-    setLocation(target.value);
-  };
+  const [form, setForm] = useState({
+    location: "",
+    maxDistance: null,
+    trade: null,
+  });
 
-  const updateCoords = async () => {
-    if (!location) {
+  const getTraderCoords = async () => {
+    if (!form.location) {
       return;
     }
     const data = await axios.get(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=KEY`,
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${form.location}&key=KEY`,
     );
-    setCurrentCoords(data.data.results[0].geometry.location);
+
+    return data.data.results[0].geometry.location;
   };
 
-  const handleSelection = (trade) => {
-    setJobs([currentCoords, ...findAllMatchingTrades(trade, currentCoords)]);
+  const getAvailableJobs = (coords) => {
+    setJobs([
+      coords,
+      ...findAllMatchingTrades(form.trade, coords, form.maxDistance),
+    ]);
   };
+
   const updateMedia = () => {
     setDesktop(window.innerWidth > 1024);
   };
@@ -80,17 +87,45 @@ function App() {
     return () => window.removeEventListener("resize", updateMedia);
   });
 
+  const onFormChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const getJobs = async () => {
+    try {
+      const coords = await getTraderCoords();
+      setCurrentCoords(coords);
+      getAvailableJobs(coords);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="App">
       <header className="App-header"></header>
-      <label htmlFor="location">Where are you?</label>
-      <input
-        name="location"
-        onBlur={updateCoords}
-        onChange={updateLocation}
-        value={location}
-      />
-      <TradeSelector trades={trades} handleSelection={handleSelection} />
+
+      <div className="form">
+        <label htmlFor="location">Where are you?</label>
+        <input name="location" onChange={onFormChange} value={form.location} />
+        <DropDown
+          message={"Select your trade: "}
+          options={trades}
+          handleChange={onFormChange}
+          name="trade"
+        />
+        <DropDown
+          message={"Max distance to travel: "}
+          options={[1, 5, 10, 20, 25, 40]}
+          handleChange={onFormChange}
+          name="maxDistance"
+        />
+        <button onClick={getJobs}>find me jobs!</button>
+      </div>
+
       {jobs && (
         <MapList
           selectJob={(job) => {

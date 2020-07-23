@@ -8,7 +8,7 @@ const JobPopUp = ({ job }) => {
         <p>Skill required: {job.$skill}</p>
         <p>Reported issue: {job.$description}</p>
         <p>Reported issue: {job.$claims[0].claimType}</p>
-        {/* <p>Rough distance: {getDistance(client, trader)}</p> */}
+        <p>Estimated distance: {job.distanceFromTrader}</p>
       </div>
     </Wrapper>
   );

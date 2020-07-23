@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import GoogleMapReact from "google-map-react";
 import JobPopUp from "../JobPopUp/JobPopUp";
-import "./MapList.css";
 
 const Marker = ({ job, selectJob, cn }) => (
   <div
@@ -21,8 +20,6 @@ const MapList = ({ centerCoords, jobs, selectJob, selectedJob }) => {
 
   return (
     <Wrapper>
-      {/* Important! Always set the container height explicitly */}
-
       {jobs.length > 0 ? (
         <div className="map">
           <GoogleMapReact
@@ -73,6 +70,36 @@ const Wrapper = styled.div`
     height: 90vh;
     width: 100vw;
   }
+  .marker:active,
+  .marker:hover {
+    background-color: green;
+  }
+
+  .marker {
+    z-index: 1000;
+    position: relative;
+    width: 18px;
+    height: 18px;
+    background-color: #000;
+    border: 2px solid #fff;
+    border-radius: 100%;
+  }
+
+  .trader {
+    z-index: 1100;
+    position: relative;
+    width: 18px;
+    height: 18px;
+    background-color: yellow;
+    border: 2px solid black;
+    border-radius: 100%;
+  }
+
+  .selected {
+    z-index: 1400;
+    background-color: green;
+  }
+
   .nojobs {
     font-size: 1.2em;
     text-align: center;
@@ -85,6 +112,7 @@ const Wrapper = styled.div`
       height: 100vh;
       width: 50vw;
       left: 50%;
+      top: 0;
     }
   }
 `;

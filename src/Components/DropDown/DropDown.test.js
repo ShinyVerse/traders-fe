@@ -51,7 +51,6 @@ describe("DropDown", () => {
       <DropDown options={trades} handleChange={handleSelection} name="trade" />,
     );
     const selectElement = getByTestId("dropdown");
-    const tradeItemNodes = getAllByTestId("option");
 
     fireEvent.change(selectElement, {
       target: { value: trades[1] },

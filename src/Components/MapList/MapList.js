@@ -2,13 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import GoogleMapReact from "google-map-react";
 import JobPopUp from "../JobPopUp/JobPopUp";
+import homeserveIcon from "../../assets/homeserveIcon.png";
 
 const Marker = ({ job, selectJob, cn }) => (
-  <div
+  <img
     onClick={() => {
       selectJob(job);
     }}
     key={job.id}
+    alt="icon"
+    src={homeserveIcon}
     className={`marker ${cn}`}
   />
 );
@@ -16,11 +19,11 @@ const Marker = ({ job, selectJob, cn }) => (
 const TraderMarker = () => <div className="trader"></div>;
 
 const MapList = ({ centerCoords, jobs, selectJob, selectedJob }) => {
-  const zoom = 11;
+  const zoom = 12;
 
   return (
     <Wrapper>
-      {jobs.length > 0 ? (
+      {jobs.length > 1 ? (
         <div className="map">
           <GoogleMapReact
             bootstrapURLKeys={{
@@ -66,23 +69,46 @@ const MapList = ({ centerCoords, jobs, selectJob, selectedJob }) => {
 };
 
 const Wrapper = styled.div`
+  @keyframes expand {
+    0% {
+      width: 30px;
+      height: 30px;
+    }
+
+    100% {
+      width: 45px;
+      height: 45px;
+    }
+  }
+
+  @keyframes expandMob {
+    0% {
+      width: 20px;
+      height: 20px;
+    }
+
+    100% {
+      width: 25px;
+      height: 25px;
+    }
+  }
+
   .map {
     height: 90vh;
     width: 100vw;
   }
   .marker:active,
   .marker:hover {
-    background-color: green;
+    background-color: black;
   }
 
   .marker {
     z-index: 1000;
     position: relative;
-    width: 18px;
-    height: 18px;
-    background-color: #000;
-    border: 2px solid #fff;
+    width: 20px;
+    height: 20px;
     border-radius: 100%;
+    margin: auto;
   }
 
   .trader {
@@ -96,8 +122,12 @@ const Wrapper = styled.div`
   }
 
   .selected {
-    z-index: 1400;
-    background-color: green;
+    z-index: 800;
+    animation: expandMob 0.3s ease;
+    background-color: black;
+    width: 25px;
+    height: 25px;
+    animation-fill-mode: forwards;
   }
 
   .nojobs {
@@ -107,12 +137,24 @@ const Wrapper = styled.div`
     width: 100%;
   }
   @media (min-width: 1024px) {
-    .map {
+    .map,
+    .nojobs {
       position: absolute;
       height: 100vh;
       width: 50vw;
       left: 50%;
       top: 0;
+    }
+    .selected {
+      width: 45px;
+      height: 45px;
+      animation: expand 0.3s ease;
+      animation-fill-mode: forwards;
+    }
+
+    .marker {
+      width: 30px;
+      height: 30px;
     }
   }
 `;

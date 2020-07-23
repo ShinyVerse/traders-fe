@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import styled from "styled-components";
 import "./App.css";
 import data from "./mockdata";
 import JobList from "./Components/JobList/JobList";
 import MapList from "./Components/MapList/MapList";
 import DropDown from "./Components/DropDown/DropDown";
+import homeserveIcon from "./assets/homeserveIcon.png";
 
 const trades = data.reduce((joblist, job) => {
   return joblist.includes(job.$trade) ? joblist : [...joblist, job.$trade];
@@ -49,6 +51,7 @@ const findAllMatchingTrades = (type, currentCoords, distanceForTravel) => {
 
 function App() {
   const [jobs, setJobs] = useState(null);
+
   const [selectedJob, setSelectedJob] = useState(null);
   const [currentCoords, setCurrentCoords] = useState("");
 
@@ -95,6 +98,11 @@ function App() {
   };
 
   const getJobs = async () => {
+    for (let prop in form) {
+      if (!form[prop]) {
+        return;
+      }
+    }
     try {
       const coords = await getTraderCoords();
       setCurrentCoords(coords);
@@ -106,25 +114,34 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header"></header>
+      <Wrapper>
+        {isDesktop && <img src={homeserveIcon} className="logo" alt="logo" />}
+        <div className="form">
+          <label htmlFor="location">Your current location:</label>
+          <input
+            className="location"
+            name="location"
+            onChange={onFormChange}
+            value={form.location}
+          />
 
-      <div className="form">
-        <label htmlFor="location">Where are you?</label>
-        <input name="location" onChange={onFormChange} value={form.location} />
-        <DropDown
-          message={"Select your trade: "}
-          options={trades}
-          handleChange={onFormChange}
-          name="trade"
-        />
-        <DropDown
-          message={"Max distance to travel: "}
-          options={[1, 5, 10, 20, 25, 40]}
-          handleChange={onFormChange}
-          name="maxDistance"
-        />
-        <button onClick={getJobs}>find me jobs!</button>
-      </div>
+          <DropDown
+            message={"Select your trade: "}
+            options={trades}
+            handleChange={onFormChange}
+            name="trade"
+          />
+          <DropDown
+            message={"Distance wishing to travel: "}
+            options={[1, 5, 10, 20, 25, 40]}
+            handleChange={onFormChange}
+            name="maxDistance"
+          />
+          <button className="form-btn" onClick={getJobs}>
+            find me jobs!
+          </button>
+        </div>
+      </Wrapper>
 
       {jobs && (
         <MapList
@@ -148,5 +165,66 @@ function App() {
     </div>
   );
 }
+
+const Wrapper = styled.div`
+  .form {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    justify-content: space-around;
+    height: 160px;
+    border: black solid 1px;
+    border-radius: 10px;
+    width: 90%;
+    padding: 10px;
+    margin: 5px auto;
+    text-align: center;
+  }
+
+  .location {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  label {
+    margin-right: 10px;
+  }
+
+  .form-btn {
+    width: 50%;
+    align-self: center;
+    border-radius: 10px;
+    padding: 5px;
+  }
+
+  @media (min-width: 1024px) {
+    .logo {
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+    }
+    .form {
+      font-size: 1.5em;
+      position: absolute;
+      width: 35%;
+      padding: 20px;
+      margin: 10px;
+      height: 200px;
+      top: 2%;
+      left: 120px;
+      border: black solid 1px;
+      border-radius: 10px;
+    }
+    .form-btn {
+      width: 40%;
+      font-size: 1em;
+      margin-top: 2px;
+    }
+
+    .location {
+      font-size: 1em;
+    }
+  }
+`;
 
 export default App;

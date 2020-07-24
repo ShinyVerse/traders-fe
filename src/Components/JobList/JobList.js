@@ -7,6 +7,7 @@ const JobList = ({ jobs, selectedJob, selectJob, takeJob }) => {
       <ul className="list">
         {jobs.map((job, index) => {
           if (index === 0) {
+            // eslint-disable-next-line
             return;
           }
           let isSelected = job === selectedJob;

@@ -18,7 +18,7 @@ const Marker = ({ job, selectJob, cn }) => (
 
 const TraderMarker = () => <div className="trader"></div>;
 
-const MapList = ({ centerCoords, jobs, selectJob, selectedJob }) => {
+const MapList = ({ centerCoords, jobs, selectJob, selectedJob, takeJob }) => {
   const zoom = 12;
 
   return (
@@ -57,7 +57,7 @@ const MapList = ({ centerCoords, jobs, selectJob, selectedJob }) => {
               }
             })}
           </GoogleMapReact>
-          {selectedJob && <JobPopUp job={selectedJob} />}
+          {selectedJob && <JobPopUp job={selectedJob} takeJob={takeJob} />}
         </div>
       ) : (
         <div className="nojobs">

@@ -163,6 +163,7 @@ function App() {
           centerCoords={currentCoords}
           jobs={jobs}
           selectedJob={selectedJob}
+          takeJob={takeJob}
         />
       )}
       {isDesktop && jobs && (

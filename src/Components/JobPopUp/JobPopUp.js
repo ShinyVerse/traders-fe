@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const JobPopUp = ({ job }) => {
+const JobPopUp = ({ job, takeJob }) => {
   return (
     <Wrapper>
       <div className="card">
@@ -9,6 +9,7 @@ const JobPopUp = ({ job }) => {
         <p>Reported issue: {job.$description}</p>
         <p>Reported issue: {job.$claims[0].claimType}</p>
         <p>Estimated distance: {job.distanceFromTrader}</p>
+        <button onClick={() => takeJob(job.$id)}>take job</button>
       </div>
     </Wrapper>
   );

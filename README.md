@@ -33,16 +33,15 @@ Desktop view with no available jobs
 ### Mobile
 
 Mobile view with jobs
-<br /><img src="https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/Mob-map.png" width=150 height=250>
+<br /><img src="https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/Mob-map.png" width=200 height=300>
 
 Mobile view with selected job
-
-<br /><img src="https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/Mob-jobs.png" width=150 height=250>
+<br /><img src="https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/Mob-jobs.png" width=200 height=300>
 
 Known bug: requires a way to close the jobpopup with an X in cornet, otherwise cannot click on other jobs available.
 
 Mobile view with no jobs
-<br /><img src="https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/Mob-nojobs.png" width=150 height=250>
+<br /><img src="https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/Mob-nojobs.png" width=200 height=300>
 
 ## Prerequisites
 

@@ -33,7 +33,7 @@ Desktop view with no available jobs
 ### Mobile
 
 Mobile view with jobs
-![Desktop view with jobs](https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/Mob-map.png)
+<img src="https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/Mob-map.png" width=100 height=200>
 
 Mobile view with selected job
 ![Desktop view with jobs](https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/Mob-jobs.png)

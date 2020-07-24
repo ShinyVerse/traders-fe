@@ -6,6 +6,12 @@ To build a React or React Native frontend that shows the jobs available to be ta
 
 It should allow them to quickly evaluate how far away the job is, and what the problem is. Then they can accept the job and tell us they are on their way. When they are looking at the jobs, they should be able to see a map with their current location and a pin showing the destination.
 
+## Example to use to get results for jobs:
+
+Location: New York
+Trade: Electric
+Distance: 40
+
 ### Requirements
 
 - [x] Use of React
@@ -63,7 +69,9 @@ You will need to create a .env file in the root of the project and put this vari
 
 ## Install
 
-This project has used CRA to get going quickly. To get going, once in the project folder, simply run:
+Clone the repo and cd into the project folder.
+
+This project has used CRA to get going quickly. To get going simply run:
 
 `npm install`
 

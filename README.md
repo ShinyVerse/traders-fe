@@ -38,13 +38,13 @@ Mobile view with jobs
 Mobile view with selected job
 <br /><img src="https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/Mob-jobs.png" width=200 height=300>
 
-Known bug: requires a way to close the jobpopup with an X in cornet, otherwise cannot click on other jobs available.
+Known bug: requires a way to close the jobpopup with an X in corner, otherwise cannot click on other jobs available.
 
 Mobile view with no jobs
 <br /><img src="https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/Mob-nojobs.png" width=200 height=300>
 
 Basic Architecture that drove the project
-![](https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/basicArchitecture.png)
+![diagram](https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/basicArchitecture.png)
 
 ## Prerequisites
 

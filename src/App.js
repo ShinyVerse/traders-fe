@@ -65,11 +65,15 @@ function App() {
     if (!form.location) {
       return;
     }
-    const data = await axios.get(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${form.location}&key=KEY`,
-    );
-
-    return data.data.results[0].geometry.location;
+    try {
+      const data = await axios.get(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${form.location}&key=${process.env.REACT_APP_GOOGLE_KEY}`,
+      );
+      return data.data.results[0].geometry.location;
+    } catch (err) {
+      //alert for user to go here
+      return "";
+    }
   };
 
   const getAvailableJobs = (coords) => {
@@ -108,6 +112,7 @@ function App() {
       setCurrentCoords(coords);
       getAvailableJobs(coords);
     } catch (err) {
+      //alert for user to go here
       console.log(err);
     }
   };

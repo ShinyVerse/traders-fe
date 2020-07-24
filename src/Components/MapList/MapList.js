@@ -27,7 +27,7 @@ const MapList = ({ centerCoords, jobs, selectJob, selectedJob }) => {
         <div className="map">
           <GoogleMapReact
             bootstrapURLKeys={{
-              key: KEY,
+              key: process.env.REACT_APP_GOOGLE_KEY,
             }}
             defaultCenter={centerCoords}
             defaultZoom={zoom}

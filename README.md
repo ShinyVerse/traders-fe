@@ -24,6 +24,8 @@ It should allow them to quickly evaluate how far away the job is, and what the p
 
 ### Desktop
 
+![Desktop view with jobs](https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/Desktop-jobs.png)
+
 ### Mobile
 
 ## Prerequisites

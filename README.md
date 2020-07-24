@@ -24,9 +24,23 @@ It should allow them to quickly evaluate how far away the job is, and what the p
 
 ### Desktop
 
+Desktop view with jobs
 ![Desktop view with jobs](https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/Desktop-jobs.png)
 
+Desktop view with no available jobs
+![Desktop view with jobs](https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/Desktop-nojobs.png)
+
 ### Mobile
+
+Mobile view with jobs
+![Desktop view with jobs](https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/Mob-map.png)
+
+Mobile view with selected job
+![Desktop view with jobs](https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/Mob-jobs.png)
+Known bug: requires a way to close the jobpopup with an X in cornet, otherwise cannot click on other jobs available.
+
+Mobile view with no jobs
+![Desktop view with jobs](https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/Mob-nojobs.png)
 
 ## Prerequisites
 

@@ -43,6 +43,9 @@ Known bug: requires a way to close the jobpopup with an X in cornet, otherwise c
 Mobile view with no jobs
 <br /><img src="https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/Mob-nojobs.png" width=200 height=300>
 
+Basic Architecture that drove the project
+![](https://github.com/ShinyVerse/traders-fe/blob/master/src/assets/basicArchitecture.png)
+
 ## Prerequisites
 
 A Google API key is required.

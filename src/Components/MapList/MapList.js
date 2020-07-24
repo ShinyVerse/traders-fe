@@ -9,7 +9,7 @@ const Marker = ({ job, selectJob, cn }) => (
     onClick={() => {
       selectJob(job);
     }}
-    key={job.id}
+    key={job.$id}
     alt="icon"
     src={homeserveIcon}
     className={`marker ${cn}`}

@@ -76,6 +76,13 @@ function App() {
     }
   };
 
+  const takeJob = (id) => {
+    const remainingJobs = jobs.filter((job) => job.$id !== id);
+    console.log(id);
+    console.log(remainingJobs);
+    setJobs(remainingJobs);
+  };
+
   const getAvailableJobs = (coords) => {
     setJobs([
       coords,
@@ -164,6 +171,7 @@ function App() {
             jobs={jobs}
             selectedJob={selectedJob}
             selectJob={setSelectedJob}
+            takeJob={takeJob}
           />
         </div>
       )}
